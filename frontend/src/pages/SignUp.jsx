@@ -42,7 +42,7 @@ export default function SignUpPage() {
     if (name === 'password') setPassword(value);
     if (name === 'email') setEmail(value);
     if (name === 'first_name') setFirstName(value);
-    if (name === 'first_name') setLastName(value);
+    if (name === 'last_name') setLastName(value);
   };
 
   return <>

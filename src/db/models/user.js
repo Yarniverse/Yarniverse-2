@@ -53,14 +53,30 @@ class User {
     return knex.raw('TRUNCATE users;');
   }
 
-  update = async (username) => { // dynamic queries are easier if you add more properties
+  update = async (username, password, bio ) => { // dynamic queries are easier if you add more properties
+    const updateData = {};
+
+    if (username) {
+      updateData.username = username;
+    }
+  
+    if (password) {
+      const passwordHash = await hashPassword(password);
+      updateData.password_hash = passwordHash;
+    }
+  
+    if (bio) {
+      updateData.bio = bio;
+    }
+  
     const rows = await knex('users')
       .where({ id: this.id })
-      .update({ username })
+      .update(updateData)
       .returning('*');
-
+  
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
+
   };
 
   isValidPassword = async (password) => (
