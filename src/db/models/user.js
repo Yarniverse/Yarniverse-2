@@ -6,10 +6,14 @@ class User {
 
   // Why have a constructor here? We need a way to take the raw data returned from 
   // the database and hide the passwordHash before sending it back to the controller
-  constructor({ id, username, password_hash }) {
+  constructor({ id, username, password_hash, email, first_name, last_name, bio}) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
+    this.email = email;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.bio = bio;
   }
 
   static async list() {
@@ -34,12 +38,12 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async create(username, password) {
+  static async create(username, password, email, first_name, last_name) {
     const passwordHash = await hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const args = [username, passwordHash];
+    const query = `INSERT INTO users (username, password_hash, email, first_name, last_name)
+      VALUES (?, ?, ?, ?, ?) RETURNING *`;
+    const args = [username, passwordHash, email, first_name, last_name];
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
     return new User(user);
