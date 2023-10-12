@@ -36,15 +36,19 @@ export default function UserPage() {
   // Ideally, this would update if we mutated it
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
+  const profileEmail = isCurrentUserProfile ? currentUser.email : userProfile.email;
+  const profileName = isCurrentUserProfile ? `${currentUser.first_name} ${currentUser.last_name}` : `${userProfile.first_name} ${userProfile.last_name}`;
+  const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
 
   return <>
-    <h1>{profileUsername}</h1>
-    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-    <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
+    <h1>{profileName}</h1>
+    <h3>@{profileUsername}</h3>
+    <p>User Email: {profileEmail}</p>
+    <p>User Bio: {profileBio}</p>
     {
       !!isCurrentUserProfile
         && <UpdateProfileForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
+    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
   </>;
 }
