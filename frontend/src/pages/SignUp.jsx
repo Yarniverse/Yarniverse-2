@@ -11,6 +11,10 @@ export default function SignUpPage() {
   const [errorText, setErrorText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
+
   // We could also use a single state variable for the form data:
   // const [formData, setFormData] = useState({ username: '', password: '' });
   // What would be the pros and cons of that?
@@ -21,8 +25,11 @@ export default function SignUpPage() {
     event.preventDefault();
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
+    if (!email ) return setErrorText('Missing email address');
+    if (!first_name || !setFirstName) return setError('Missing first name or last name');
+    console.log();
 
-    const [user, error] = await createUser({ username, password });
+    const [user, error] = await createUser({ username, password, email, first_name, last_name });
     if (error) return setErrorText(error.statusText);
 
     setCurrentUser(user);
@@ -33,6 +40,9 @@ export default function SignUpPage() {
     const { name, value } = event.target;
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
+    if (name === 'email') setEmail(value);
+    if (name === 'first_name') setFirstName(value);
+    if (name === 'first_name') setLastName(value);
   };
 
   return <>
@@ -56,6 +66,36 @@ export default function SignUpPage() {
         name="password"
         onChange={handleChange}
         value={password}
+      />
+
+<label htmlFor="password">Email</label>
+      <input
+        autoComplete="off"
+        type="text"
+        id="email"
+        name="email"
+        onChange={handleChange}
+        value={email}
+      />
+
+<label htmlFor="email">First Name</label>
+      <input
+        autoComplete="off"
+        type="text"
+        id="first_name"
+        name="first_name"
+        onChange={handleChange}
+        value={first_name}
+      />
+
+<label htmlFor="password">Last Name</label>
+      <input
+        autoComplete="off"
+        type="text"
+        id="last_name"
+        name="last_name"
+        onChange={handleChange}
+        value={last_name}
       />
 
       {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
