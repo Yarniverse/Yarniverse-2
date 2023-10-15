@@ -5,6 +5,7 @@ const router = require('./router');
 const projectRoutes = require('./projectRoutes');
 const feedRouter = require('./feedRoutes');
 const logRoutes = require('./middleware/log-routes');
+const likeRouter = require('./likesRoutes')
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static a
 app.use('/api', router);
 app.use('/api', feedRouter);
 app.use('/api', projectRoutes);
-
+app.use('/api', likeRouter);
 
 // Requests meant for the API will be sent along to the router.
 // For all other requests, send back the index.html file in the public folder.
