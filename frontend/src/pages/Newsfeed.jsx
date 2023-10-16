@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import PostCard from "../components/PostCard";
 import PostList from "../components/PostList";
 const NewsfeedPage = () => {
   return (

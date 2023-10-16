@@ -15,11 +15,6 @@ export default function SiteHeadingAndNav() {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/users" end={true}>
-              Users
-            </NavLink>
-          </li>
           {currentUser ? (
             <>
               <li>

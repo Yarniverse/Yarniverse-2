@@ -11,6 +11,8 @@ import UsersPage from "./pages/Users";
 import UserPage from "./pages/User";
 import ProjectPage from "./pages/Projects";
 import NewsfeedPage from "./pages/Newsfeed";
+import PageFooter from "./components/Footer";
+import PageSidebar from "./components/Sidebar";
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -22,6 +24,7 @@ export default function App() {
     <>
       <SiteHeadingAndNav />
       <main>
+        <PageSidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
@@ -36,6 +39,7 @@ export default function App() {
           <Route path="/posts" element={<NewsfeedPage />} />
         </Routes>
       </main>
+      <PageFooter />
     </>
   );
 }

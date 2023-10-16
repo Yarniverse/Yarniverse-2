@@ -7,19 +7,22 @@ export default function UpdateProfileForm({ currentUser, setCurrentUser }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     console.log(formData);
-    const [user, error] = await updateProfile(Object.fromEntries(formData.entries()));
+    const [user, error] = await updateProfile(
+      Object.fromEntries(formData.entries())
+    );
     // If our user isn't who they say they are
     // (an auth error on update) log them out
     if (error?.status > 400 && error?.status < 500) {
       setCurrentUser(null);
-      return navigate('/');
+      return navigate("/");
     }
 
     setCurrentUser(user);
     event.target.reset();
   };
 
-  return <form onSubmit={handleSubmit}>
+  return (
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">New Username</label>
         <input type="text" id="username" name="username" />
@@ -37,5 +40,6 @@ export default function UpdateProfileForm({ currentUser, setCurrentUser }) {
 
       <input type="hidden" name="id" value={currentUser.id} />
       <button type="submit">Update Profile</button>
-  </form>;
+    </form>
+  );
 }

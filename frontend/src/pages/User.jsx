@@ -4,11 +4,12 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateProfileForm from "../components/UpdateUsernameForm";
+import UserProfileCard from "../components/UserProfileCard";
 
 export default function UserPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState([]);
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id); //checkng to see if the current user is the person whose session this is
@@ -48,19 +49,25 @@ export default function UserPage() {
 
   return (
     <>
-      <h1>{profileName}</h1>
-      <h3>@{profileUsername}</h3>
-      <p>User Email: {profileEmail}</p>
-      <p>User Bio: {profileBio}</p>
-      {!!isCurrentUserProfile && (
-        <UpdateProfileForm
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
-        />
-      )}
-      {!!isCurrentUserProfile && (
-        <button onClick={handleLogout}>Log Out</button>
-      )}
+      <div
+        className="container block overflow-visible;
+"
+      >
+        <UserProfileCard
+          className=" flex"
+          profile={userProfile}
+        ></UserProfileCard>
+        {!!isCurrentUserProfile && (
+          <UpdateProfileForm
+            className="flex"
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+        )}
+        {!!isCurrentUserProfile && (
+          <button onClick={handleLogout}>Log Out</button>
+        )}
+      </div>
     </>
   );
 }
