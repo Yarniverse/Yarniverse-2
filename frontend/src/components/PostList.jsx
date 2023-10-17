@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import PostCard from "../components/PostCard";
+import CreateAPost from "./CreatePost";
+import { fetchPosts } from "../utils";
 const PostList = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    async function doFetch() {
-      const res = await fetch(`/api/posts`);
-      const resData = await res.json();
-      setPosts(resData);
-    }
-    doFetch();
+    fetchPosts(setPosts);
   }, [setPosts]);
 
   return (
@@ -22,6 +19,7 @@ const PostList = () => {
           </li>
         ))}
       </ul>
+      <CreateAPost></CreateAPost>
     </>
   );
 };

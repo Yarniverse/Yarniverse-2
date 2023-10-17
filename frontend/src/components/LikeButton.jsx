@@ -1,14 +1,39 @@
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+
 export default function LikeButton() {
-  // use create a like function
-  // maybe useState to track the likes on a post? Or to track if the user already liked the post
-  // code runs with  on click? handleClick method on button
-  // liked ? change icon style name, clicked again ? change it again
+  const [isClick, setClick] = useState(false);
+
+  // useEffect(() => {
+  //   const ClickLike = async () => {};
+  //   //fetch call here
+  //   // return boolean value once fetch call is complete - sp  if like !== null then liked = true;
+  // }, [setLike]);
+
+  // console.log(like);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    setClick(!isClick);
+  };
+
+  const getIcon = () => {
+    return isClick ? solidHeart : regularHeart;
+  };
+
+  const getStyle = () => {
+    return isClick ? { color: "red" } : {};
+  };
+
   return (
     <>
-      <button onClick={this.handleClick}>
-        <i className="far fa-heart fa-lg" style={{ color: "#33c3f0" }}></i>
-        <i className="fas fa-heart fa-lg" style={{ color: "red" }}></i>
-      </button>
+      <FontAwesomeIcon
+        icon={getIcon()}
+        style={getStyle()}
+        onClick={handleClick}
+      />
     </>
   );
 }

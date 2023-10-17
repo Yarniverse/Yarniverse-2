@@ -5,7 +5,7 @@ import UserWelcome from "../components/UserWelcome";
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const { user_id } = useParams();
-
+  console.log(typeof user_id);
   useEffect(() => {
     async function doFetch() {
       const res = await fetch(`/api/projects/all/${Number(user_id)}`);
@@ -14,10 +14,6 @@ const ProjectList = () => {
     }
     doFetch();
   }, [setProjects]);
-
-  // get the information about the current user;
-  // hold the id of that user in a variable
-  // do a fetch call to the project api and get all user projects based on that variable;
 
   return (
     <>

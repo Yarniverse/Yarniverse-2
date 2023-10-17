@@ -13,7 +13,6 @@ export default function UserPage() {
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id); //checkng to see if the current user is the person whose session this is
-
   useEffect(() => {
     const loadUser = async () => {
       const [user, error] = await getUser(id);
@@ -23,7 +22,7 @@ export default function UserPage() {
 
     loadUser();
   }, [id]);
-
+  console.log(id);
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);

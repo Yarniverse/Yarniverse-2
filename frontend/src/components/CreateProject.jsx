@@ -1,6 +1,8 @@
 import { useContext, useState, useEffect } from "react";
+import CurrentUserContext from "../contexts/current-user-context";
 
-export default function CreateAProject({ userID }) {
+export default function CreateAProject() {
+  const { currentUser } = useContext(CurrentUserContext);
   const [errorText, setErrorText] = useState("");
   const [project_name, setProjectName] = useState("");
   const [project_description, setProjectDescription] = useState("");
@@ -40,7 +42,7 @@ export default function CreateAProject({ userID }) {
     <>
       {!!errorText && <p>{errorText}</p>}
       <form onSubmit={handleSubmit} id="name-form">
-        <input type="hidden" name="user_id" value={parseInt(userID.user_id)} />
+        <input type="hidden" name="user_id" value={currentUser} />
         <input
           onChange={handleChange}
           type="text"
