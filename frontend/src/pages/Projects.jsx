@@ -5,7 +5,6 @@ const ProjectPage = () => {
   const user_id = useParams();
   return (
     <>
-      <h1>Project Page</h1>
       <ul>
         <li>
           <ProjectList></ProjectList>

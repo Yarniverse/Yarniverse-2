@@ -64,7 +64,12 @@ export default function UserPage() {
           />
         )}
         {!!isCurrentUserProfile && (
-          <button onClick={handleLogout}>Log Out</button>
+          <button
+            onClick={handleLogout}
+            className="py-3 w-full text-xl text-white bg-[#6aa096] rounded-2xl"
+          >
+            Log Out
+          </button>
         )}
       </div>
     </>

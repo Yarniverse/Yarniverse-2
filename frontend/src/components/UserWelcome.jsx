@@ -16,5 +16,9 @@ export default function UserWelcome({ userInfo }) {
     }, [setUsersName]);
   }
 
-  return <h1>Welcome, {usersName}!</h1>;
+  return (
+    <h1 className=" my-16	text-3xl font-bold text-center mb-4">
+      Welcome to your projects, {usersName}!
+    </h1>
+  );
 }

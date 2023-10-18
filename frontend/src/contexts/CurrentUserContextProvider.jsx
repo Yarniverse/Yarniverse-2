@@ -11,7 +11,7 @@ export default function CurrentUserContextProvider({ children }) {
       const res = await checkForLoggedInUser();
       console.log(res);
       setCurrentUser(res);
-      localStorage.setItem("currentUser", res);
+      localStorage.setItem("currentUser_id", res.id);
     };
     doFetch();
   }, []);

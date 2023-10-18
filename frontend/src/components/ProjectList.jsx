@@ -18,8 +18,7 @@ const ProjectList = () => {
   return (
     <>
       <UserWelcome userInfo={user_id}></UserWelcome>
-      <h1>Projects</h1>
-      <ul>
+      <ul class="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7 my-10">
         {projects.map((project, i) => (
           <li key={i}>
             <ProjectCard key={project.id} project={project}></ProjectCard>

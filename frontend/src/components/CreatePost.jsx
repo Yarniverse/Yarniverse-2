@@ -2,9 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 
 export default function CreateAPost() {
-  const { currentUser } = useContext(CurrentUserContext);
-  console.log(currentUser);
-
+  // const { currentUser } = useContext(CurrentUserContext);
+  const user = localStorage.getItem("currentUser_id");
+  console.log(user);
   const [errorText, setErrorText] = useState("");
   const [context, setContext] = useState("");
   const getFetchOptions = (body, method = "POST") => ({
@@ -14,7 +14,6 @@ export default function CreateAPost() {
     body: JSON.stringify(body),
   });
   const handleSubmit = async (e) => {
-    e.preventDefault();
     setErrorText("");
     if (!context) return setErrorText("Enter post content");
     const formData = new FormData(e.target);
@@ -32,7 +31,7 @@ export default function CreateAPost() {
     <>
       {!!errorText && <p>{errorText}</p>}
       <form onSubmit={handleSubmit} id="name-form">
-        <input type="hidden" name="user_id" value={currentUser} />
+        <input type="hidden" name="user_id" value={user} />
         <input
           onChange={handleChange}
           type="text"

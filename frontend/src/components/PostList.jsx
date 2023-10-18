@@ -9,17 +9,26 @@ const PostList = () => {
     fetchPosts(setPosts);
   }, [setPosts]);
 
+  const handleOnClick = (e) => {
+    const postId = e.currentTarget.getAttribute("data-post-id");
+    console.log("Clicked on post with ID:", postId);
+  };
+
   return (
     <>
-      <h1>Posts</h1>
-      <ul>
+      <h1 className="text-3xl font-bold text-center mb-4">Newsfeed</h1>
+      <CreateAPost></CreateAPost>
+      <ul className="grid grid-cols-2">
         {posts.map((post, i) => (
           <li key={i}>
-            <PostCard key={post.id} post={post}></PostCard>
+            <PostCard
+              key={post.id}
+              post={post}
+              onClick={handleOnClick}
+            ></PostCard>
           </li>
         ))}
       </ul>
-      <CreateAPost></CreateAPost>
     </>
   );
 };
